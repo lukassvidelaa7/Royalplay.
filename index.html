@@ -3,146 +3,177 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lucky Royal - Apuestas y Juegos</title>
+    <title>Lucky Royal - Apuestas y Casino VIP</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body { background-color: #0f172a; color: #fff; font-family: sans-serif; }
-        .gold-bg { background: linear-gradient(135deg, #d4af37, #aa8c2c); }
-        .gold-text { color: #d4af37; }
+        body { background-color: #0b0e14; color: #fff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+        .gold-gradient { background: linear-gradient(135deg, #d4af37 0%, #ffdf00 50%, #aa8c2c 100%); }
+        .gold-text { background: linear-gradient(135deg, #ffd700 0%, #fff8dc 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .card-bg { background: linear-gradient(145deg, #161b22 0%, #0d1117 100%); border: 1px solid rgba(212, 175, 55, 0.25); }
     </style>
 </head>
-<body class="pb-24">
+<body class="pb-28">
 
-    <!-- CABECERA ESTILO 1XBET -->
-    <header class="bg-slate-900 border-b border-yellow-600/30 p-3 flex justify-between items-center sticky top-0 z-50">
+    <!-- HEADER SUPERIOR ESTILO 1XBET -->
+    <header class="bg-[#0b0e14] border-b border-yellow-600/40 px-3 py-2.5 flex justify-between items-center sticky top-0 z-50">
         <div class="flex items-center space-x-2">
-            <i class="fa-solid fa-crown text-yellow-500 text-xl"></i>
-            <span class="font-bold text-lg tracking-wider gold-text">LUCKY ROYAL</span>
+            <div class="w-8 h-8 rounded-lg gold-gradient flex items-center justify-center text-slate-950 font-bold">
+                <i class="fa-solid fa-crown"></i>
+            </div>
+            <div>
+                <h1 class="font-black text-sm tracking-wider gold-text uppercase">LUCKY ROYAL</h1>
+                <p class="text-[9px] text-yellow-500/80 tracking-widest uppercase">Cupón & Casino</p>
+            </div>
         </div>
-        <div class="bg-slate-800 border border-yellow-500/40 px-3 py-1 rounded-full text-xs">
-            <span class="text-gray-400">Saldo:</span> <span id="balance" class="font-bold text-yellow-400">10,000</span> ARS
+        <div class="flex items-center space-x-2 bg-slate-900 border border-yellow-500/40 px-3 py-1 rounded-full">
+            <i class="fa-solid fa-coins text-yellow-400 text-xs"></i>
+            <span id="user-balance" class="font-bold text-xs text-yellow-400">10,000.00</span>
+            <span class="text-[9px] text-gray-400">ARS</span>
         </div>
     </header>
 
-    <!-- PESTAÑAS / CUPON ESTILO -->
+    <!-- PANEL TIPO CUPÓN / APUESTA RÁPIDA -->
     <div class="p-3">
-        <div class="bg-slate-800 border border-yellow-600/30 rounded-xl p-3 mb-4 shadow-lg">
-            <div class="flex justify-between items-center border-b border-gray-700 pb-2 mb-3">
-                <span class="text-xs font-bold text-yellow-400 uppercase"><i class="fa-solid fa-ticket"></i> Cupón de Apuestas / Juegos</span>
-                <span class="text-[10px] bg-yellow-500/20 text-yellow-300 px-2 py-0.5 rounded">Demo Activa</span>
+        <div class="card-bg rounded-xl p-3 mb-4 shadow-xl">
+            <div class="flex justify-between items-center border-b border-yellow-600/20 pb-2 mb-3">
+                <span class="text-xs font-bold text-yellow-400 uppercase flex items-center gap-1.5">
+                    <i class="fa-solid fa-ticket"></i> Cupón de Apuestas
+                </span>
+                <span class="text-[9px] bg-yellow-500 text-slate-950 font-extrabold px-2 py-0.5 rounded">MODO DEMO</span>
             </div>
-            
-            <!-- SELECCION DE JUEGO RAPIDO -->
-            <div class="space-y-2">
-                <label class="text-xs text-gray-300 block">Selecciona un juego:</label>
-                <select id="game-select" class="w-full bg-slate-900 border border-yellow-600/40 rounded-lg p-2 text-xs text-white">
-                    <option value="slots">Tragamonedas (Slot)</option>
-                    <option value="roulette">Ruleta en Vivo</option>
-                    <option value="crash">Crash Cohete</option>
-                    <option value="dice">Dados Rpidos</option>
+
+            <div class="mb-2">
+                <label class="text-[11px] text-gray-300 block mb-1">Seleccionar Minijuego:</label>
+                <select id="active-game" class="w-full bg-slate-900 border border-yellow-600/40 rounded-lg p-2 text-xs text-yellow-400 font-bold focus:outline-none">
+                    <option value="slots">🎰 Tragamonedas (Slot Royal)</option>
+                    <option value="roulette">🎡 Ruleta Europea VIP</option>
+                    <option value="crash">🚀 Crash Cohete</option>
+                    <option value="plinko">⚪ Plinko Caída Dorada</option>
+                    <option value="dice">🎲 Dados Mayor/Menor</option>
+                    <option value="coin">🪙 Cara o Cruz</option>
                 </select>
             </div>
 
-            <div class="mt-3">
-                <label class="text-xs text-gray-300 block">Monto de Apuesta (ARS):</label>
-                <input type="number" id="bet-amount" value="100" class="w-full bg-slate-900 border border-yellow-600/40 rounded-lg p-2 text-xs text-yellow-400 font-bold mt-1">
+            <div class="mb-3">
+                <label class="text-[11px] text-gray-300 block mb-1">Monto de Apuesta (ARS):</label>
+                <input type="number" id="bet-amount" value="100" class="w-full bg-slate-900 border border-yellow-600/40 rounded-lg p-2 text-xs text-white font-bold">
             </div>
 
-            <button onclick="playGame()" class="w-full gold-bg text-slate-950 font-black py-2.5 rounded-lg mt-4 text-xs shadow uppercase tracking-wider">
-                Realizar Apuesta / Jugar
+            <button onclick="executePlay()" class="w-full gold-gradient text-slate-950 font-black py-2.5 rounded-lg text-xs shadow-lg uppercase tracking-wider active:scale-95 transition">
+                Realizar Apuesta / Jugar Ronda
             </button>
+            
+            <div id="game-output" class="mt-3 bg-slate-900/80 border border-yellow-600/30 rounded-lg p-3 text-center hidden">
+                <p id="output-text" class="text-xs font-bold"></p>
+            </div>
         </div>
 
-        <!-- RESULTADO O PANTALLA DE ESTADO -->
-        <div id="result-box" class="bg-slate-800 border border-gray-700 rounded-xl p-4 text-center hidden">
-            <p id="result-text" class="text-sm font-bold"></p>
+        <!-- CATEGORÍAS DE JUEGOS -->
+        <div class="flex justify-between items-center mb-2 px-1">
+            <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wider">Catálogo de Juegos</h3>
+            <span class="text-[10px] text-yellow-500 font-bold">11 Disponibles</span>
         </div>
 
-        <!-- LISTA DE JUEGOS VISUALES -->
-        <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2 mt-6">Juegos Populares</h3>
-        <div class="grid grid-cols-2 gap-2">
-            <div onclick="quickSelect('slots')" class="bg-slate-800 border border-yellow-600/20 p-3 rounded-xl text-center cursor-pointer active:scale-95">
-                <i class="fa-solid fa-slot-machine text-2xl text-yellow-500 mb-1"></i>
-                <p class="text-xs font-bold">Tragamonedas</p>
+        <!-- GRILLA DE JUEGOS ESTILO 1XBET -->
+        <div class="grid grid-cols-2 gap-2.5">
+            <div onclick="selectAndPlay('slots')" class="card-bg p-3 rounded-xl text-center cursor-pointer active:scale-95 transition">
+                <i class="fa-solid fa-slot-machine text-2xl text-yellow-400 mb-1"></i>
+                <h4 class="text-xs font-bold text-white">Tragamonedas</h4>
+                <span class="text-[9px] text-yellow-500/80">Slot 3D VIP</span>
             </div>
-            <div onclick="quickSelect('roulette')" class="bg-slate-800 border border-yellow-600/20 p-3 rounded-xl text-center cursor-pointer active:scale-95">
-                <i class="fa-solid fa-circle-dot text-2xl text-yellow-500 mb-1"></i>
-                <p class="text-xs font-bold">Ruleta</p>
+            <div onclick="selectAndPlay('roulette')" class="card-bg p-3 rounded-xl text-center cursor-pointer active:scale-95 transition">
+                <i class="fa-solid fa-circle-dot text-2xl text-yellow-400 mb-1"></i>
+                <h4 class="text-xs font-bold text-white">Ruleta</h4>
+                <span class="text-[9px] text-yellow-500/80">Europea</span>
             </div>
-            <div onclick="quickSelect('crash')" class="bg-slate-800 border border-yellow-600/20 p-3 rounded-xl text-center cursor-pointer active:scale-95">
-                <i class="fa-solid fa-rocket text-2xl text-yellow-500 mb-1"></i>
-                <p class="text-xs font-bold">Crash Cohete</p>
+            <div onclick="selectAndPlay('crash')" class="card-bg p-3 rounded-xl text-center cursor-pointer active:scale-95 transition">
+                <i class="fa-solid fa-rocket text-2xl text-yellow-400 mb-1"></i>
+                <h4 class="text-xs font-bold text-white">Crash Cohete</h4>
+                <span class="text-[9px] text-yellow-500/80">Multiplicador x1000</span>
             </div>
-            <div onclick="quickSelect('dice')" class="bg-slate-800 border border-yellow-600/20 p-3 rounded-xl text-center cursor-pointer active:scale-95">
-                <i class="fa-solid fa-dice text-2xl text-yellow-500 mb-1"></i>
-                <p class="text-xs font-bold">Dados</p>
+            <div onclick="selectAndPlay('plinko')" class="card-bg p-3 rounded-xl text-center cursor-pointer active:scale-95 transition">
+                <i class="fa-solid fa-bowling-ball text-2xl text-yellow-400 mb-1"></i>
+                <h4 class="text-xs font-bold text-white">Plinko</h4>
+                <span class="text-[9px] text-yellow-500/80">Caída Libre</span>
+            </div>
+            <div onclick="selectAndPlay('dice')" class="card-bg p-3 rounded-xl text-center cursor-pointer active:scale-95 transition">
+                <i class="fa-solid fa-dice text-2xl text-yellow-400 mb-1"></i>
+                <h4 class="text-xs font-bold text-white">Dados</h4>
+                <span class="text-[9px] text-yellow-500/80">Suerte Rápida</span>
+            </div>
+            <div onclick="selectAndPlay('coin')" class="card-bg p-3 rounded-xl text-center cursor-pointer active:scale-95 transition">
+                <i class="fa-solid fa-coins text-2xl text-yellow-400 mb-1"></i>
+                <h4 class="text-xs font-bold text-white">Cara o Cruz</h4>
+                <span class="text-[9px] text-yellow-500/80">Doble o Nada</span>
             </div>
         </div>
     </div>
 
-    <!-- MENU INFERIOR FIJO -->
-    <nav class="fixed bottom-0 left-0 right-0 bg-slate-900 border-t border-yellow-600/30 flex justify-around py-3 text-xs z-50">
-        <button onclick="alert('Estás en el Panel Principal')" class="text-yellow-400 flex flex-col items-center">
+    <!-- NAVEGACIÓN INFERIOR FIJA -->
+    <nav class="fixed bottom-0 left-0 right-0 bg-[#0b0e14] border-t border-yellow-600/40 flex justify-around py-2.5 text-xs z-50">
+        <button onclick="window.scrollTo({top:0, behavior:'smooth'})" class="text-yellow-400 flex flex-col items-center">
             <i class="fa-solid fa-house text-sm"></i>
-            <span class="text-[10px] mt-1">Inicio</span>
+            <span class="text-[9px] mt-0.5 font-bold">Cupón</span>
         </button>
-        <button onclick="resetBalance()" class="text-gray-400 flex flex-col items-center">
+        <button onclick="resetBalance()" class="text-gray-400 hover:text-yellow-400 flex flex-col items-center">
             <i class="fa-solid fa-rotate-right text-sm"></i>
-            <span class="text-[10px] mt-1">Recargar</span>
+            <span class="text-[9px] mt-0.5">Recargar Saldo</span>
         </button>
-        <button onclick="alert('Lucky Royal - Versión Demo para Propietario')" class="text-gray-400 flex flex-col items-center">
+        <button onclick="alert('Lucky Royal - Plataforma Exclusiva VIP')" class="text-gray-400 hover:text-yellow-400 flex flex-col items-center">
             <i class="fa-solid fa-user text-sm"></i>
-            <span class="text-[10px] mt-1">Cuenta</span>
+            <span class="text-[9px] mt-0.5">Perfil</span>
         </button>
     </nav>
 
     <script>
-        let balance = 10000;
+        let balance = 10000.00;
 
         function updateUI() {
-            document.getElementById('balance').innerText = balance.toLocaleString();
+            document.getElementById('user-balance').innerText = balance.toLocaleString('es-AR', {minimumFractionDigits: 2});
         }
 
-        function quickSelect(game) {
-            document.getElementById('game-select').value = game;
+        function selectAndPlay(gameKey) {
+            document.getElementById('active-game').value = gameKey;
             window.scrollTo({top: 0, behavior: 'smooth'});
         }
 
-        function playGame() {
+        function executePlay() {
             let bet = parseFloat(document.getElementById('bet-amount').value);
-            let box = document.getElementById('result-box');
-            let txt = document.getElementById('result-text');
+            let game = document.getElementById('active-game').value;
+            let outputBox = document.getElementById('game-output');
+            let outputText = document.getElementById('output-text');
 
             if (isNaN(bet) || bet <= 0) {
-                alert("Ingresa un monto válido");
+                alert("Ingresa un monto de apuesta válido.");
                 return;
             }
             if (balance < bet) {
-                alert("Saldo insuficiente. Toca 'Recargar' abajo.");
+                alert("Saldo insuficiente. Toca 'Recargar Saldo' abajo.");
                 return;
             }
 
             balance -= bet;
-            let win = Math.random() > 0.5;
-            box.classList.remove('hidden');
+            outputBox.classList.remove('hidden');
 
+            let win = Math.random() > 0.45; // 55% probabilidad de premio
             if (win) {
-                let premio = bet * 2;
-                balance += premio;
-                box.className = "bg-emerald-950/80 border border-emerald-500 rounded-xl p-4 text-center mt-3";
-                txt.innerHTML = `<span class="text-emerald-400">¡GANASTE! +$${premio.toLocaleString()} ARS</span>`;
+                let multiplier = game === 'crash' ? 3.5 : (game === 'slots' ? 5 : 2);
+                let prize = bet * multiplier;
+                balance += prize;
+                outputBox.className = "mt-3 bg-emerald-950/90 border border-emerald-500 rounded-lg p-3 text-center";
+                outputText.innerHTML = `<span class="text-emerald-400 font-bold">¡APUESTA GANADA! (+${multiplier}x) Ganaste $${prize.toLocaleString()} ARS</span>`;
             } else {
-                box.className = "bg-rose-950/80 border border-rose-500 rounded-xl p-4 text-center mt-3";
-                txt.innerHTML = `<span class="text-rose-400">No hubo suerte. Perdiste -$${bet.toLocaleString()} ARS</span>`;
+                outputBox.className = "mt-3 bg-rose-950/90 border border-rose-500 rounded-lg p-3 text-center";
+                outputText.innerHTML = `<span class="text-rose-400 font-bold">Cupón no premiado. Perdiste -$${bet.toLocaleString()} ARS</span>`;
             }
             updateUI();
         }
 
         function resetBalance() {
-            balance = 10000;
+            balance = 10000.00;
             updateUI();
-            alert("Saldo restablecido a 10,000 ARS");
+            alert("¡Saldo recargado a $10,000.00 ARS de prueba!");
         }
     </script>
 </body>
