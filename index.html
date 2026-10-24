@@ -1,85 +1,93 @@
 <!doctype html>
 <html lang="es">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#0b0b0d">
-<title>Lucky Royal — Juegos</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#111111">
+<title>Lucky Royal</title>
 <style>
-:root{--ink:#f8f4e8;--muted:#b9b1a0;--blue:#d5ad53;--purple:#9c7830;--orange:#e6bd60;--bg:#0b0b0d}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;color:var(--ink);padding-bottom:88px}
-header{height:76px;background:#111114;display:flex;align-items:center;justify-content:space-between;padding:0 18px;position:sticky;top:0;z-index:5;box-shadow:0 2px 12px #0008;border-bottom:1px solid #8e6d2b}
-.brand{font-size:25px;font-weight:1000;letter-spacing:-1px;color:#f4d17a}.brand span{color:#b58a35}
-.pill{background:#2a2415;color:#f4d17a;border-radius:30px;padding:10px 13px;font-weight:800;font-size:13px;border:0}
-.search{font-size:25px;background:none;border:0;color:#d8bd79}
-nav.top{display:flex;justify-content:space-around;background:#151518;padding:10px 4px 13px;gap:4px;border-bottom:1px solid #3c301a}
-nav.top button{border:0;background:none;color:#b9b1a0;font-weight:700;font-size:12px;min-width:54px}nav.top b{display:block;font-size:23px;margin-bottom:4px}
-main{max-width:850px;margin:auto;padding:12px}
-.hero{display:flex;gap:12px;overflow:auto;scroll-snap-type:x mandatory;margin:2px 0 14px}.heroCard{scroll-snap-align:start;flex:0 0 86%;height:205px;border-radius:24px;padding:20px;color:white;display:flex;flex-direction:column;justify-content:end;position:relative;overflow:hidden;background:radial-gradient(circle at 80% 15%,#6b5120,transparent 35%),linear-gradient(135deg,#17130b,#3b2c12 55%,#b68a35)}.heroCard:nth-child(2){background:radial-gradient(circle at 75% 20%,#6b5120,transparent 35%),linear-gradient(130deg,#100f0b,#3b301a,#8b6827)}.heroCard:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 75% 20%,#fff8,transparent 25%),radial-gradient(circle at 18% 28%,#ffffff38,transparent 24%)}.heroCard>*{position:relative}.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:2px;font-weight:900;opacity:.85}.heroCard h1{font-size:29px;line-height:1.02;margin:8px 0}.heroCard p{margin:0;font-size:13px;opacity:.9}
-.section{border-radius:25px;padding:14px 13px 16px;margin:14px 0;overflow:hidden}.section.purple{background:linear-gradient(110deg,#302719,#171512)}.section.orange{background:linear-gradient(110deg,#5a431b,#241d11)}.section.blue{background:linear-gradient(110deg,#25231d,#141416)}.section h2{font-size:23px;color:#f4d17a;margin:0 0 12px}.section.blue h2{color:#f4d17a}
-.scroller{display:flex;gap:12px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}.scroller::-webkit-scrollbar{display:none}
-.game{border:0;text-align:left;flex:0 0 44%;min-width:130px;height:142px;border-radius:19px;padding:0;overflow:hidden;color:white;position:relative;background:#142e4c;box-shadow:0 5px 14px #0008;border:1px solid #55411d}.game .art{position:absolute;inset:0;display:grid;place-items:center;font-size:53px;background:radial-gradient(circle at 30% 20%,#fff7,transparent 20%),linear-gradient(145deg,var(--c1),var(--c2))}.game .art:after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 35%,#07162ddd)}.game strong{position:absolute;bottom:12px;left:12px;right:8px;z-index:1;font-size:16px}.game small{position:absolute;top:10px;left:10px;background:#111114fff30;border:1px solid #ffffff4a;border-radius:20px;padding:4px 7px;z-index:1;font-size:10px;font-weight:800}
-.listHead{display:flex;align-items:center;justify-content:space-between;margin:22px 3px 12px}.listHead h2{margin:0;font-size:23px}.listHead button{border:0;border-radius:20px;padding:8px 13px;background:#2a2415;color:#f4d17a;font-weight:800}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.grid .game{width:100%;min-width:0;height:160px}
-.bottom{position:fixed;z-index:8;bottom:0;left:0;right:0;background:#111114;box-shadow:0 -5px 22px #0008;border-top:1px solid #3c301a;display:flex;justify-content:space-around;padding:9px 4px calc(8px + env(safe-area-inset-bottom));}.bottom button{border:0;background:none;color:#b9b1a0;font-weight:700;font-size:11px;display:flex;flex-direction:column;align-items:center;gap:3px}.bottom span{font-size:22px}.bottom .active{color:#f4d17a}.bottom .center{background:#b58a35;color:#111;border-radius:50%;width:56px;height:56px;margin-top:-25px;box-shadow:0 4px 12px #347fc455}
-.modal{position:fixed;inset:0;background:#07162dbb;z-index:20;display:none;align-items:center;justify-content:center;padding:18px}.modal.show{display:flex}.dialog{width:min(440px,100%);background:#17171a;color:#f8f4e8;border:1px solid #57421e;border-radius:24px;padding:22px;box-shadow:0 20px 60px #0004}.dialog h2{margin:0 0 6px}.close{float:right;border:0;background:#302719;color:#f4d17a;border-radius:50%;width:34px;height:34px;font-size:18px}.playArea{margin-top:15px;background:#100f0d;border:1px solid #4a391c;border-radius:18px;padding:20px;text-align:center}.playArea .big{font-size:66px}.primary{border:0;border-radius:14px;padding:12px 18px;background:linear-gradient(135deg,#f2d27c,#a77b24);color:#17120a;font-weight:900;margin-top:12px}.note{font-size:12px;color:#b9b1a0;line-height:1.4;margin:18px 4px}
-@media(min-width:650px){.heroCard{flex-basis:48%}.game{flex-basis:30%}.grid{grid-template-columns:repeat(4,minmax(0,1fr))}.section h2{font-size:25px}}
-</style></head>
+:root{--bg:#111;--panel:#1c1c1c;--panel2:#252525;--gold:#e4bd58;--text:#f6f6f6;--muted:#aaa;--line:#333}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif}
+header{position:sticky;top:0;z-index:5;background:#171717;border-bottom:1px solid var(--line);padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.logo{font-weight:900;font-size:22px;letter-spacing:-.7px}.logo span{color:var(--gold)}.balance{border:1px solid #57451d;border-radius:22px;padding:10px 13px;color:var(--gold);font-weight:bold;white-space:nowrap}
+nav{display:flex;overflow:auto;gap:8px;padding:10px;background:#171717;border-bottom:1px solid var(--line)}
+nav button{background:transparent;color:#bbb;border:0;padding:10px 13px;white-space:nowrap;font-weight:bold;border-radius:8px}
+nav button.active,nav button:hover{background:#342b17;color:var(--gold)}
+main{max-width:900px;margin:auto;padding:14px 12px 90px}
+.hero{background:linear-gradient(110deg,#282113,#171717 70%);border:1px solid #57451d;border-radius:12px;padding:20px;margin-bottom:16px}
+.hero small{color:var(--gold);font-weight:bold;letter-spacing:2px}.hero h1{font-size:25px;margin:9px 0}.hero p{margin:0;color:#c6c6c6;font-size:14px}
+.section{margin:18px 0}.section h2{font-size:18px;margin:0 0 12px}
+.games{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.game{background:linear-gradient(145deg,#292929,#1b1b1b);border:1px solid #383838;border-radius:10px;min-height:112px;padding:12px 8px;color:white;text-align:left;cursor:pointer;display:flex;flex-direction:column;justify-content:space-between}
+.game:active{transform:scale(.98)}.emoji{font-size:31px}.game b{font-size:14px}.tag{font-size:10px;color:var(--gold)}
+.notice{font-size:12px;color:var(--muted);line-height:1.5;margin-top:20px}
+.bottom{position:fixed;bottom:0;left:0;right:0;z-index:5;background:#171717;border-top:1px solid var(--line);display:flex;justify-content:space-around;padding:9px 4px calc(9px + env(safe-area-inset-bottom))}
+.bottom button{border:0;background:transparent;color:#aaa;font-size:12px;padding:6px;cursor:pointer}.bottom button strong{display:block;color:var(--gold);font-size:18px;margin-bottom:3px}
+.overlay{position:fixed;inset:0;background:#000c;z-index:10;display:none;align-items:center;justify-content:center;padding:16px}.overlay.open{display:flex}
+.modal{width:min(100%,420px);background:#1c1c1c;border:1px solid #5a4720;border-radius:14px;padding:18px;box-shadow:0 12px 50px #000}
+.modalhead{display:flex;justify-content:space-between;align-items:center}.modal h2{margin:0}.close{background:#333;color:#fff;border:0;border-radius:7px;padding:8px 11px;font-size:18px}
+.playarea{background:#111;border-radius:10px;margin:14px 0;padding:22px 10px;text-align:center;min-height:125px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px}
+.big{font-size:42px}.result{min-height:20px;color:var(--gold);font-weight:bold}
+.controls{display:flex;gap:8px;flex-wrap:wrap}.controls button,.primary{background:var(--gold);color:#17130a;border:0;border-radius:8px;padding:12px 14px;font-weight:bold;cursor:pointer;flex:1}.controls button.secondary{background:#333;color:#fff}.controls button:disabled{opacity:.4}
+input{width:100%;padding:12px;background:#111;border:1px solid #444;color:#fff;border-radius:8px;margin:8px 0 12px}
+@media(min-width:600px){.games{grid-template-columns:repeat(4,minmax(0,1fr))}.game{min-height:130px}.hero h1{font-size:30px}}
+</style>
+</head>
 <body>
-<header><div class="brand">LUCKY<span> ROYAL</span></div><button class="pill" id="balance">✦ 1.000 fichas</button><button class="search" aria-label="Buscar" onclick="searchGames()">⌕</button></header>
-<nav class="top"><button onclick="go('top')"><b>✦</b>Top</button><button onclick="go('populares')"><b>♨</b>Populares</button><button onclick="go('arcade')"><b>🎮</b>Arcade</button><button onclick="go('casino')"><b>🃏</b>Casino</button><button onclick="searchGames()"><b>⚄</b>Buscar</button></nav>
+<header><div class="logo">LUCKY <span>ROYAL</span></div><div class="balance">✦ <span id="balance">1000</span> fichas</div></header>
+<nav id="nav"><button class="active" data-filter="Todos">✦ Top</button><button data-filter="Popular">♨ Populares</button><button data-filter="Arcade">🎮 Arcade</button><button data-filter="Casino">🎲 Casino</button><button data-filter="Todos">⌕ Buscar</button></nav>
 <main>
-<div class="hero">
-<div class="heroCard"><span class="eyebrow">Lucky Royal Originals</span><h1>Tu reino de<br>juegos empieza</h1><p>Juegos originales · Fichas virtuales · Gratis</p></div>
-<div class="heroCard"><span class="eyebrow">RETO DESTACADO</span><h1>Probá tu suerte<br>en el arcade ✨</h1><p>Jugá por diversión, sin dinero real</p></div>
-</div>
-<section class="section purple" id="populares"><h2>Para vos ✨</h2><div class="scroller" id="personal"></div></section>
-<section class="section orange" id="top"><h2>Los más jugados ⭐</h2><div class="scroller" id="topgames"></div></section>
-<section class="section blue" id="arcade"><h2>Arcade viral 🎮</h2><div class="scroller" id="arcadegames"></div></section>
-<div class="listHead" id="casino"><h2>Todos los juegos</h2><button onclick="searchGames()">Buscar ⌕</button></div>
-<div class="grid" id="allgames"></div>
-<p class="note">Lucky Royal es una experiencia de entretenimiento con fichas virtuales sin valor monetario. No acepta depósitos, no permite retiros y no ofrece apuestas con dinero real. +18. Jugá con responsabilidad.</p>
+<section class="hero"><small>LUCKY ROYAL · ARCADE</small><h1>Elegí tu próximo juego</h1><p>Juegos rápidos y originales con fichas virtuales de práctica.</p></section>
+<section class="section"><h2 id="sectionTitle">Juegos populares</h2><div class="games" id="games"></div></section>
+<p class="notice">Modo de demostración: las fichas son virtuales y no tienen valor monetario. Esta web no acepta depósitos ni procesa retiros.</p>
 </main>
-<nav class="bottom"><button class="active" onclick="go('populares')"><span>♨</span>Populares</button><button onclick="showFavorites()"><span>★</span>Favoritos</button><button class="center" onclick="openGame('Patito')"><span>🐥</span>Jugar</button><button onclick="showHistory()"><span>◷</span>Historial</button><button onclick="go('casino')"><span>▦</span>Menú</button></nav>
-<div class="modal" id="modal"><div class="dialog"><button class="close" onclick="closeGame()">×</button><div class="eyebrow">LUCKY ROYAL ARCADE</div><h2 id="gameTitle">Juego</h2><p id="gameDesc">Minijuego gratuito con fichas virtuales</p><div class="playArea"><div class="big" id="gameArt">🐥</div><div id="gameResult">Tocá jugar para empezar una ronda.</div><button class="primary" id="playBtn" onclick="playRound()">Jugar ronda</button></div><p class="note">Solo fichas virtuales sin valor real. No hay depósitos ni premios en dinero.</p></div></div>
+<div class="bottom"><button data-filter="Popular"><strong>♨</strong>Populares</button><button data-filter="Favoritos"><strong>☆</strong>Favoritos</button><button id="home"><strong>⌂</strong>Inicio</button><button id="history"><strong>◷</strong>Historial</button><button id="menu"><strong>☷</strong>Menú</button></div>
+<div class="overlay" id="overlay"><div class="modal"><div class="modalhead"><h2 id="gameTitle">Juego</h2><button class="close" id="close">✕</button></div><div class="playarea"><div class="big" id="art">🎮</div><div class="result" id="result">Elegí una opción para jugar</div></div><div class="controls" id="controls"></div></div></div>
 <script>
 const games=[
-{name:'Patito',icon:'🐥',tag:'Viral',type:'arcade',c1:'#f7bf39',c2:'#ff7b38',desc:'Ayudá al patito a cruzar el río.'},
-{name:'Crash',icon:'🚀',tag:'Popular',type:'arcade',c1:'#f45d74',c2:'#673ce5',desc:'Un desafío arcade de reflejos.'},
-{name:'Plinko',icon:'🔵',tag:'Nuevo',type:'arcade',c1:'#2ec5e8',c2:'#4854d8',desc:'Dejá caer la ficha y mirá el recorrido.'},
-{name:'Ruleta',icon:'🎡',tag:'Clásico',type:'casino',c1:'#16a878',c2:'#155c6b',desc:'Girás una rueda de colores por diversión.'},
-{name:'Dados',icon:'🎲',tag:'Clásico',type:'casino',c1:'#6b77ef',c2:'#a64ce0',desc:'Lanzá los dados virtuales.'},
-{name:'Moneda',icon:'🪙',tag:'Rápido',type:'arcade',c1:'#eaa42b',c2:'#b85c22',desc:'Cara o cruz, una ronda rápida.'},
-{name:'Cohetes',icon:'🌌',tag:'Arcade',type:'arcade',c1:'#243caa',c2:'#d44da6',desc:'Esquivá obstáculos espaciales.'},
-{name:'Memoria',icon:'🧠',tag:'Puzzle',type:'arcade',c1:'#23a6a8',c2:'#1b587c',desc:'Probá tu memoria con un reto corto.'},
-{name:'Cartas',icon:'🃏',tag:'Clásico',type:'casino',c1:'#d74c6a',c2:'#642f9e',desc:'Elegí una carta al azar.'},
-{name:'Tesoro',icon:'💎',tag:'Aventura',type:'arcade',c1:'#2f7fd3',c2:'#783be2',desc:'Encontrá el tesoro escondido.'},
-{name:'Tiro al blanco',icon:'🎯',tag:'Habilidad',type:'arcade',c1:'#f76d49',c2:'#e33d73',desc:'Probá tu puntería en un minijuego.'},
-{name:'Estrellas',icon:'🌟',tag:'Casual',type:'arcade',c1:'#4e8ff0',c2:'#6f4de6',desc:'Un reto sencillo para pasar el rato.'}
+{name:'Ruleta',icon:'🎡',cat:'Casino',tag:'Popular',cost:10},
+{name:'Tragamonedas',icon:'🎰',cat:'Casino',tag:'Popular',cost:10},
+{name:'Plinko',icon:'🔵',cat:'Arcade',tag:'Popular',cost:10},
+{name:'Crash',icon:'🚀',cat:'Arcade',tag:'Popular',cost:10},
+{name:'Dados',icon:'🎲',cat:'Casino',tag:'Popular',cost:10},
+{name:'Cara o cruz',icon:'🪙',cat:'Casino',tag:'Popular',cost:10},
+{name:'Cartas',icon:'🃏',cat:'Casino',tag:'Nuevo',cost:10},
+{name:'Memoria',icon:'🧠',cat:'Arcade',tag:'Nuevo',cost:0},
+{name:'Tesoro',icon:'💎',cat:'Arcade',tag:'Nuevo',cost:10},
+{name:'Tiro al blanco',icon:'🎯',cat:'Arcade',tag:'Nuevo',cost:10},
+{name:'Estrellas',icon:'🌟',cat:'Arcade',tag:'Nuevo',cost:10},
+{name:'Patito',icon:'🐥',cat:'Arcade',tag:'Viral',cost:0}
 ];
-let balance=1000,current=null,favorites=new Set(),history=[];
-function card(g){return `<button class="game" style="--c1:${g.c1};--c2:${g.c2}" onclick="openGame('${g.name}')"><span class="art">${g.icon}</span><small>${g.tag}</small><strong>${g.name}</strong></button>`}
-function render(){document.getElementById('personal').innerHTML=games.slice(0,5).map(card).join('');document.getElementById('topgames').innerHTML=[games[3],games[0],games[1],games[2],games[8]].map(card).join('');document.getElementById('arcadegames').innerHTML=games.filter(g=>g.type==='arcade').slice(0,7).map(card).join('');document.getElementById('allgames').innerHTML=games.map(card).join('');updateBalance()}
-function updateBalance(){document.getElementById('balance').textContent='✦ '+balance.toLocaleString('es-AR')+' fichas'}
-function openGame(name){current=games.find(g=>g.name===name);if(!current)return;document.getElementById('gameTitle').textContent=current.name;document.getElementById('gameDesc').textContent=current.desc;document.getElementById('gameArt').textContent=current.icon;document.getElementById('gameResult').textContent='Tenés '+balance+' fichas virtuales. ¡A jugar!';document.getElementById('playBtn').textContent='Jugar ronda';document.getElementById('modal').classList.add('show')}
-function closeGame(){document.getElementById('modal').classList.remove('show')}
-function playRound(){if(!current)return;let outcome='¡Ronda completada!';let reward=5;
-if(current.name==='Dados'){let a=1+Math.floor(Math.random()*6),b=1+Math.floor(Math.random()*6);outcome='🎲 Salieron '+a+' y '+b+'. '+(a+b>=8?'¡Buen resultado!':'¡Probá otra vez.');reward=a+b>=8?12:3;}
-else if(current.name==='Moneda'){let side=Math.random()<.5?'cara':'cruz';outcome='🪙 Salió '+side+'.';reward=side==='cara'?8:3;}
-else if(current.name==='Ruleta'){let colors=['dorado','negro','rojo','verde'];let c=colors[Math.floor(Math.random()*colors.length)];outcome='🎡 La rueda cayó en '+c+'.';reward=c==='dorado'?15:5;}
-else if(current.name==='Plinko'){let slot=1+Math.floor(Math.random()*7);outcome='🔵 La ficha cayó en la casilla '+slot+'.';reward=slot===4?20:(slot===1||slot===7?2:7);}
-else if(current.name==='Crash'){let mult=(1+Math.random()*4).toFixed(2);outcome='🚀 El cohete llegó a x'+mult+' antes de aterrizar. ¡Ronda terminada!';reward=Number(mult)>=2.5?14:4;}
-else if(current.name==='Patito'){let safe=Math.random()<.7;outcome=safe?'🐥 ¡El patito cruzó el río sano y salvo!':'🌊 ¡Una ola lo frenó! ¡Intentá de nuevo!';reward=safe?10:2;}
-else if(current.name==='Cartas'){let cards=['A♠','K♥','Q♦','J♣','10♠'];let c=cards[Math.floor(Math.random()*cards.length)];outcome='🃏 Tu carta es '+c+'.';reward=c.startsWith('A')||c.startsWith('K')?12:5;}
-else if(current.name==='Tesoro'){let found=Math.random()<.35;outcome=found?'💎 ¡Encontraste el tesoro escondido!':'🗺️ No estaba en ese cofre. ¡Explorá otra vez!';reward=found?18:3;}
-else if(current.name==='Memoria'){let seq=Array.from({length:3},()=>['🍒','⭐','🔔','🍀'][Math.floor(Math.random()*4)]);outcome='🧠 Secuencia: '+seq.join(' ')+' — ¡intentá memorizarla!';reward=8;}
-else if(current.name==='Tiro al blanco'){let points= Math.floor(Math.random()*101);outcome='🎯 Puntuación: '+points+'/100.';reward=points>=70?15:5;}
-else if(current.name==='Cohetes'){let dodged=Math.floor(Math.random()*6)+1;outcome='🌌 Esquivaste '+dodged+' obstáculos.';reward=5+dodged;}
-else if(current.name==='Estrellas'){let stars=Math.floor(Math.random()*5)+1;outcome='🌟 Juntaste '+stars+' estrellas.';reward=3+stars*2;}
-document.getElementById('gameResult').textContent=outcome+' +'+reward+' fichas virtuales.';history.unshift(current.name+' — '+outcome);if(history.length>10)history.pop();balance+=reward;updateBalance();}
-function go(id){document.getElementById(id).scrollIntoView({behavior:'smooth',block:'start'})}
-function searchGames(){let q=prompt('¿Qué juego buscás?');if(q===null)return;let matches=games.filter(g=>g.name.toLowerCase().includes(q.toLowerCase()));document.getElementById('allgames').innerHTML=matches.length?matches.map(card).join(''):'<p>No encontramos ese juego. Probá con Patito, Crash o Plinko.</p>';go('casino')}
-function showFavorites(){let list=games.filter(g=>favorites.has(g.name));alert(list.length?'Favoritos: '+list.map(g=>g.name).join(', '):'Todavía no tenés favoritos.')}
-function showHistory(){alert(history.length?'Últimas rondas:\\n'+history.join('\\n'):'Todavía no jugaste ninguna ronda.')}
+let balance=1000, filter='Todos', current=null, history=[];
+const $=id=>document.getElementById(id);
+function render(){ $('balance').textContent=balance.toLocaleString('es-AR');let list=games.filter(g=>filter==='Todos'||(filter==='Popular'?g.tag==='Popular':filter==='Favoritos'?false:g.cat===filter));$('sectionTitle').textContent=filter==='Todos'?'Todos los juegos':filter==='Favoritos'?'Favoritos':filter==='Popular'?'Juegos populares':filter;
+$('games').innerHTML=list.map(g=>`<button class="game" data-game="${g.name}"><span class="tag">${g.tag}</span><span class="emoji">${g.icon}</span><b>${g.name}</b></button>`).join('')||'<p>No hay favoritos guardados todavía.</p>';
+document.querySelectorAll('[data-game]').forEach(b=>b.addEventListener('click',()=>openGame(b.dataset.game)));
+}
+document.querySelectorAll('[data-filter]').forEach(b=>b.addEventListener('click',()=>{filter=b.dataset.filter;document.querySelectorAll('nav button').forEach(x=>x.classList.toggle('active',x===b));render();window.scrollTo({top:0,behavior:'smooth'});}));
+$('home').onclick=()=>{filter='Todos';render();window.scrollTo({top:0,behavior:'smooth'})};
+$('close').onclick=()=> $('overlay').classList.remove('open');
+$('overlay').addEventListener('click',e=>{if(e.target===$('overlay'))$('overlay').classList.remove('open')});
+$('history').onclick=()=>alert(history.length?history.slice(0,10).join('\\n'):'Todavía no jugaste ninguna ronda.');
+$('menu').onclick=()=>alert('Lucky Royal · Juegos de demostración con fichas virtuales.');
+function openGame(name){current=games.find(g=>g.name===name);$('gameTitle').textContent=current.name;$('art').textContent=current.icon;$('result').textContent='Cada ronda cuesta '+current.cost+' fichas virtuales.';$('controls').innerHTML='';$('overlay').classList.add('open');
+if(name==='Cara o cruz'){addBtn('Cara',()=>round('cara'));addBtn('Cruz',()=>round('cruz'));}else if(name==='Dados'){addBtn('Lanzar dados',()=>round('dados'));}else if(name==='Memoria'){addBtn('Mostrar secuencia',()=>round('memoria'));}else if(name==='Ruleta'){addBtn('Girar ruleta',()=>round('ruleta'));}else if(name==='Tragamonedas'){addBtn('Girar',()=>round('slots'));}else if(name==='Plinko'){addBtn('Soltar ficha',()=>round('plinko'));}else if(name==='Crash'){addBtn('Lanzar cohete',()=>round('crash'));}else if(name==='Cartas'){addBtn('Sacar carta',()=>round('cartas'));}else if(name==='Tesoro'){addBtn('Abrir cofre',()=>round('tesoro'));}else if(name==='Tiro al blanco'){addBtn('Disparar',()=>round('tiro'));}else if(name==='Estrellas'){addBtn('Juntar estrellas',()=>round('estrellas'));}else if(name==='Patito'){addBtn('Cruzar el río',()=>round('patito'));}addBtn('Cerrar',()=>$('overlay').classList.remove('open'),'secondary');}
+function addBtn(label,fn,cls=''){let b=document.createElement('button');b.textContent=label;if(cls)b.className=cls;b.onclick=fn;$('controls').appendChild(b)}
+function round(kind){if(!current)return;let cost=current.cost;if(balance<cost){$('result').textContent='No te alcanzan las fichas de práctica.';return}balance-=cost;let reward=0,msg='',art=current.icon;const rand=n=>Math.floor(Math.random()*n);
+if(kind==='cara'||kind==='cruz'){let v=Math.random()<.5?'cara':'cruz';msg='Salió '+v+'.';if(v===kind){reward=20;msg+=' ¡Acertaste!';}}
+else if(kind==='dados'){let a=rand(6)+1,b=rand(6)+1;art='🎲 '+a+' + '+b;msg='Sacaste '+a+' y '+b+'.';if(a+b>=8){reward=20;msg+=' ¡Buena tirada!';}}
+else if(kind==='memoria'){let s=Array.from({length:4},()=>['🍒','⭐','🔔','🍀'][rand(4)]);art=s.join(' ');msg='Memorizá esta secuencia.';reward=5;}
+else if(kind==='ruleta'){let v=['🔴 rojo','⚫ negro','🟡 dorado','🟢 verde'][rand(4)];art='🎡';msg='La ruleta cayó en '+v+'.';if(v.includes('dorado'))reward=35;}
+else if(kind==='slots'){let s=Array.from({length:3},()=>['🍒','🔔','7️⃣','⭐'][rand(4)]);art=s.join(' ');msg='';if(s[0]===s[1]&&s[1]===s[2]){reward=60;msg='¡Tres iguales!';}else if(s[0]===s[1]||s[1]===s[2]){reward=15;msg='¡Dos iguales!';}else msg='Probá otra vez.';}
+else if(kind==='plinko'){let v=rand(7)+1;art='🔵';msg='La ficha cayó en la casilla '+v+'.';reward=[0,5,10,20,40,20,10,5][v];}
+else if(kind==='crash'){let x=(1+Math.random()*4).toFixed(2);art='🚀 x'+x;msg='El cohete terminó en x'+x+'.';if(Number(x)>=2.5)reward=25;}
+else if(kind==='cartas'){let v=['A♠','K♥','Q♦','J♣','10♠'][rand(5)];art=v;msg='Tu carta: '+v+'.';if(v.startsWith('A')||v.startsWith('K'))reward=25;}
+else if(kind==='tesoro'){let ok=rand(4)===0;art=ok?'💎':'📦';msg=ok?'¡Encontraste el tesoro!':'El cofre estaba vacío.';if(ok)reward=45;}
+else if(kind==='tiro'){let v=rand(101);art='🎯 '+v;msg='Puntos conseguidos: '+v+'.';if(v>=70)reward=25;}
+else if(kind==='estrellas'){let v=rand(5)+1;art='🌟'.repeat(v);msg='Juntaste '+v+' estrellas.';reward=v*4;}
+else if(kind==='patito'){let ok=Math.random()<.7;art=ok?'🐥':'🌊';msg=ok?'¡El patito cruzó!':'¡La ola lo frenó!';if(ok)reward=12;}
+balance+=reward;$('balance').textContent=balance.toLocaleString('es-AR');$('art').textContent=art;$('result').textContent=msg+(reward?' +'+reward+' fichas.':' Sin premio esta vez.');history.unshift(current.name+': '+msg+' (+'+reward+')');}
 render();
 </script>
-</body></html>
+</body>
+</html>
