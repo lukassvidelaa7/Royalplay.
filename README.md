@@ -1,1 +1,149 @@
-# Royalplay.
+# Royalplay.<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lucky Royal - Apuestas y Juegos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { background-color: #0f172a; color: #fff; font-family: sans-serif; }
+        .gold-bg { background: linear-gradient(135deg, #d4af37, #aa8c2c); }
+        .gold-text { color: #d4af37; }
+    </style>
+</head>
+<body class="pb-24">
+
+    <!-- CABECERA ESTILO 1XBET -->
+    <header class="bg-slate-900 border-b border-yellow-600/30 p-3 flex justify-between items-center sticky top-0 z-50">
+        <div class="flex items-center space-x-2">
+            <i class="fa-solid fa-crown text-yellow-500 text-xl"></i>
+            <span class="font-bold text-lg tracking-wider gold-text">LUCKY ROYAL</span>
+        </div>
+        <div class="bg-slate-800 border border-yellow-500/40 px-3 py-1 rounded-full text-xs">
+            <span class="text-gray-400">Saldo:</span> <span id="balance" class="font-bold text-yellow-400">10,000</span> ARS
+        </div>
+    </header>
+
+    <!-- PESTAÑAS / CUPON ESTILO -->
+    <div class="p-3">
+        <div class="bg-slate-800 border border-yellow-600/30 rounded-xl p-3 mb-4 shadow-lg">
+            <div class="flex justify-between items-center border-b border-gray-700 pb-2 mb-3">
+                <span class="text-xs font-bold text-yellow-400 uppercase"><i class="fa-solid fa-ticket"></i> Cupón de Apuestas / Juegos</span>
+                <span class="text-[10px] bg-yellow-500/20 text-yellow-300 px-2 py-0.5 rounded">Demo Activa</span>
+            </div>
+            
+            <!-- SELECCION DE JUEGO RAPIDO -->
+            <div class="space-y-2">
+                <label class="text-xs text-gray-300 block">Selecciona un juego:</label>
+                <select id="game-select" class="w-full bg-slate-900 border border-yellow-600/40 rounded-lg p-2 text-xs text-white">
+                    <option value="slots">Tragamonedas (Slot)</option>
+                    <option value="roulette">Ruleta en Vivo</option>
+                    <option value="crash">Crash Cohete</option>
+                    <option value="dice">Dados Rpidos</option>
+                </select>
+            </div>
+
+            <div class="mt-3">
+                <label class="text-xs text-gray-300 block">Monto de Apuesta (ARS):</label>
+                <input type="number" id="bet-amount" value="100" class="w-full bg-slate-900 border border-yellow-600/40 rounded-lg p-2 text-xs text-yellow-400 font-bold mt-1">
+            </div>
+
+            <button onclick="playGame()" class="w-full gold-bg text-slate-950 font-black py-2.5 rounded-lg mt-4 text-xs shadow uppercase tracking-wider">
+                Realizar Apuesta / Jugar
+            </button>
+        </div>
+
+        <!-- RESULTADO O PANTALLA DE ESTADO -->
+        <div id="result-box" class="bg-slate-800 border border-gray-700 rounded-xl p-4 text-center hidden">
+            <p id="result-text" class="text-sm font-bold"></p>
+        </div>
+
+        <!-- LISTA DE JUEGOS VISUALES -->
+        <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2 mt-6">Juegos Populares</h3>
+        <div class="grid grid-cols-2 gap-2">
+            <div onclick="quickSelect('slots')" class="bg-slate-800 border border-yellow-600/20 p-3 rounded-xl text-center cursor-pointer active:scale-95">
+                <i class="fa-solid fa-slot-machine text-2xl text-yellow-500 mb-1"></i>
+                <p class="text-xs font-bold">Tragamonedas</p>
+            </div>
+            <div onclick="quickSelect('roulette')" class="bg-slate-800 border border-yellow-600/20 p-3 rounded-xl text-center cursor-pointer active:scale-95">
+                <i class="fa-solid fa-circle-dot text-2xl text-yellow-500 mb-1"></i>
+                <p class="text-xs font-bold">Ruleta</p>
+            </div>
+            <div onclick="quickSelect('crash')" class="bg-slate-800 border border-yellow-600/20 p-3 rounded-xl text-center cursor-pointer active:scale-95">
+                <i class="fa-solid fa-rocket text-2xl text-yellow-500 mb-1"></i>
+                <p class="text-xs font-bold">Crash Cohete</p>
+            </div>
+            <div onclick="quickSelect('dice')" class="bg-slate-800 border border-yellow-600/20 p-3 rounded-xl text-center cursor-pointer active:scale-95">
+                <i class="fa-solid fa-dice text-2xl text-yellow-500 mb-1"></i>
+                <p class="text-xs font-bold">Dados</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- MENU INFERIOR FIJO -->
+    <nav class="fixed bottom-0 left-0 right-0 bg-slate-900 border-t border-yellow-600/30 flex justify-around py-3 text-xs z-50">
+        <button onclick="alert('Estás en el Panel Principal')" class="text-yellow-400 flex flex-col items-center">
+            <i class="fa-solid fa-house text-sm"></i>
+            <span class="text-[10px] mt-1">Inicio</span>
+        </button>
+        <button onclick="resetBalance()" class="text-gray-400 flex flex-col items-center">
+            <i class="fa-solid fa-rotate-right text-sm"></i>
+            <span class="text-[10px] mt-1">Recargar</span>
+        </button>
+        <button onclick="alert('Lucky Royal - Versión Demo para Propietario')" class="text-gray-400 flex flex-col items-center">
+            <i class="fa-solid fa-user text-sm"></i>
+            <span class="text-[10px] mt-1">Cuenta</span>
+        </button>
+    </nav>
+
+    <script>
+        let balance = 10000;
+
+        function updateUI() {
+            document.getElementById('balance').innerText = balance.toLocaleString();
+        }
+
+        function quickSelect(game) {
+            document.getElementById('game-select').value = game;
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        function playGame() {
+            let bet = parseFloat(document.getElementById('bet-amount').value);
+            let box = document.getElementById('result-box');
+            let txt = document.getElementById('result-text');
+
+            if (isNaN(bet) || bet <= 0) {
+                alert("Ingresa un monto válido");
+                return;
+            }
+            if (balance < bet) {
+                alert("Saldo insuficiente. Toca 'Recargar' abajo.");
+                return;
+            }
+
+            balance -= bet;
+            let win = Math.random() > 0.5;
+            box.classList.remove('hidden');
+
+            if (win) {
+                let premio = bet * 2;
+                balance += premio;
+                box.className = "bg-emerald-950/80 border border-emerald-500 rounded-xl p-4 text-center mt-3";
+                txt.innerHTML = `<span class="text-emerald-400">¡GANASTE! +$${premio.toLocaleString()} ARS</span>`;
+            } else {
+                box.className = "bg-rose-950/80 border border-rose-500 rounded-xl p-4 text-center mt-3";
+                txt.innerHTML = `<span class="text-rose-400">No hubo suerte. Perdiste -$${bet.toLocaleString()} ARS</span>`;
+            }
+            updateUI();
+        }
+
+        function resetBalance() {
+            balance = 10000;
+            updateUI();
+            alert("Saldo restablecido a 10,000 ARS");
+        }
+    </script>
+</body>
+</html>
